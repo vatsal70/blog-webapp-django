@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '0%t7i$$=pgje@5!g+mv3m&aere$d41wgml7&r8ja()(mb=&v!#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['blog-webapp-django.herokuapp.com']
 
 
 # Application definition
@@ -91,16 +91,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'demo_schema',
-#         'USER': 'dbadmin',
-#         'PASSWORD': 'vatsal',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -184,15 +175,7 @@ CELERY_TASK_SELERLIZER = 'json'
 
 
 
-#S3 BUCKETS CONFIG
-# AWS_ACCESS_KEY_ID = 'ASIASQUYQEABDMYI7XIH'
-# AWS_SECRET_ACCESS_KEY = 'QLbH4jVleeSNbP80xvJfVhCvd9QCTm9q7wkxNiGC'
-# AWS_SESSION_TOKEN='FwoGZXIvYXdzEFYaDLjTYXNzJlsvPpDEEyLJASg5p5VZY+Fd6fTciDfyvViC/8LvRjrPp3IU3p3NqNzcjvOtMz14ZgFdFE8XeBl7DWRIPMtbnKg1AdzoLEy2AhRf4ndmcXvCFceANLPD3H+YmiZfBOHKCMANfyjwBa4yHm1szLEUhgTNqK28qbEWdZHjQO+DYajJQ2qvWTEJtBfVDuvPik1Y/mmEz2oBY9tIBFAw9d1uopMPO8rzHK8052GuOjuSK4JOmS6ctLpRea8yUWQf4f9oL76hwG49UbUbKtTxQZDgNaxTuyimtJuGBjItx8uuBJWsqgPBwaIhKBIHiTxMuEYYyc6GizR5vpnCsOzWb9t6nvIGQFYokKym'
-# AWS_STORAGE_BUCKET_NAME = 'django-demo-blogging'
-# AWS_S3_FILE_OVERWRITE = False
-# AWS_DEFAULT_ACL = None
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 
 
 
