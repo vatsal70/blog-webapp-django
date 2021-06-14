@@ -1,0 +1,53 @@
+{% extends 'blog/basic.html' %}
+
+{% block title %} Edit Blog{% endblock %}
+
+{% block css %}
+h1 {
+    margin-bottom: 0.5rem;
+    margin-right: 11.5rem;
+    /* font-style: unset; */
+    font-weight: 300;
+    color: aliceblue;
+    font-family: 'Amatic SC', cursive;
+}{% endblock%}
+{% block body %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Welcome User!</strong> Please update your blog.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% load static %}
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+<div class="container my-3">
+    <h3>Edit Your Blog</h3>
+    <form  method="POST" class="post-form"  enctype="multipart/form-data">
+        {% csrf_token %}
+    {{ form.as_p }}
+    {{ form.media}}
+        <button type="submit"  class="btn btn-success" value="Update">Edit Blog</button>
+</form>
+    {% else %}
+    <h3>You are not authenticated individual!!</h3>
+
+    {% endif %}
+{% else %}
+    <h3>Kindly Login Please!!</h3>
+
+    {% endif %}
+
+
+</div>
+{% endblock %}
+{% block js %}
+<script>
+
+
+{% if que %}
+alert('Thanks for adding your blog with us. We will get back to you soon!');
+document.location = "/blog/addblog";
+{% endif %}
+</script>
+{% endblock %}

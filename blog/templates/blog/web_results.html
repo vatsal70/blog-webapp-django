@@ -1,0 +1,53 @@
+{% extends 'blog/basic.html' %}
+{% block title %} Results for your Search: {{ search }} {% endblock %}
+{% block css %}
+
+.web_results {
+    margin: 10px;
+}
+.card {
+    height: 380px; /* Your height here */
+    width: 300px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card-image {
+    height: 380px; /* Your height here */
+    overflow: hidden;
+}
+{% endblock %}
+
+{% block body %}
+
+
+<div class="web_results" >
+
+ <h2 style="text-align: center">{{ search | title }}</h2>
+<br>
+    <div class="row">
+        {% for posting in final_postings %}
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image">
+                        <a href="{{ posting.1 }}"><img src="{{ posting.3 }}" alt=""></a>
+                    </div>
+                    <div class="card-content">
+                        <p>{{ posting.0 }}</p>
+                    </div>
+                    <div class="card-action">
+                        <p>Price {{ posting.2 }}</p>
+                        <a href="{{ posting.1 }}">View listing:</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+
+{% endblock %}

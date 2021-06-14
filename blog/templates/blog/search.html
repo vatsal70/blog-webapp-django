@@ -1,0 +1,53 @@
+{% extends 'blog/basic.html' %}
+{% block title %}{{ query }} {% endblock %}
+{% block css %}
+.rounded {
+border-radius: 2.25rem!important;
+}
+{% endblock %}
+{% block body %}
+{% load static %}
+<div class="container">
+    <br>
+
+
+
+
+    <h2>Search Results for {{ query }}:</h2><br>
+    {% if allposts|length < 1 %}
+    <h2>Sorry!</h2>
+    Your search query: <b>{{query}}</b> - did not match any title or content.
+    {% endif %}
+    <div class="row my-2">
+
+        {% for item in allposts %}
+ <div class="col-md-6">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static" style="
+    background-color: floralwhite;">
+                    <strong class="d-inline-block mb-2 text-primary">{{item.category|title}}</strong>
+                    <h3 class="mb-0">{{item.title}}</h3>
+                    <div class="mb-1 text-muted">{{item.sub_title}}</div>
+                    <p>{{item.pub_date}}</p>
+                    <a style="text-decoration:none" href="{% url 'categoryView' item.category|slugify %}" >Related to '{{item.category|title}}'</a>
+
+                    <a style="text-decoration:none" href="{% url 'blogPost' item.pk %}" >Continue reading</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img src="/media/{{item.header_image}}" class="bd-placeholder-img" width="200" height="250"
+                        aria-label="Placeholder: Thumbnail"/>
+
+                </div>
+            </div>
+        </div>
+{% if forloop.counter|divisibleby:2 %}
+    </div><div class="row my-2">
+    {% endif %}
+
+    {% endfor %}
+
+</div>
+</div>
+
+
+{% endblock %}

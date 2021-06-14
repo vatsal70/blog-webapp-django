@@ -1,0 +1,72 @@
+{% extends 'blog/basic.html' %}
+{% block title %} {{cats}} - STH {% endblock %}
+{% block css %}
+.rounded {
+    border-radius: 2.25rem!important;
+}
+{% comment %} #hh{
+margin-left: -15px;
+} {% endcomment %}
+.button {
+        background-color: #1c87c9;
+        border: none;
+        color: white;
+        padding: 5px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        {% comment %} margin: 4px 140px; {% endcomment %}
+        margin-left: 142px;
+        cursor: pointer;
+        border-radius: 20px;
+      }
+.button:hover{
+  color: #fff;
+  background: #ff5722;
+}
+.imge{
+border-radius: 2.25rem!important;
+}
+{% endblock %}
+{% block body %}
+
+<div class="container">
+<br>
+    {% if category_posts %}
+     <h2>Related to {{cats}}:</h2><br>
+    <div class="container">
+    <div class="row my-2">
+        {% for post in category_posts %}
+    <div class="col-md-6">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static" style="
+    background-color: floralwhite;">
+                    <strong class="d-inline-block mb-2 text-primary">{{post.category|title}}</strong>
+                    <h3 class="mb-0">{{post.title|slice:":15"}}</h3>
+
+                    <div class="mb-1 text-muted">{{post.sub_title|slice:":15"}}</div><br>
+                    <p>{{post.pub_date}}</p><br>
+                    <a style="text-decoration:none" href="{% url 'blogPost' post.pk %}" >Continue reading</a>
+                </div>
+                <div class="col-auto d-none d-lg-block imge">
+                    <img src="/media/{{post.header_image}}" class="bd-placeholder-img" width="200" height="260"
+                        aria-label="Placeholder: Thumbnail"/>
+                </div>
+            </div>
+        </div>
+    {% if forloop.counter|divisibleby:2 %}
+    </div>
+    <div class="row my-2">
+    {% endif %}
+    {% endfor %}
+    </div>
+</div>
+    {% else %}
+    <h2>No Related Posts to {{cats}}:</h2>
+    {% endif %}
+</div>
+<a class="button" onclick="goBack()" style="text-decoration:none">Back</a>
+{% endblock %}
+{% block js %}
+{% endblock %}

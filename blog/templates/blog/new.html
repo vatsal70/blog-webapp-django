@@ -1,0 +1,103 @@
+{% extends 'blog/basic.html' %}
+{% block title %} Course Scrapping {% endblock %}
+{% block css %}
+html{
+    scroll-behaviour: smooth;
+}
+.page_link {
+    pointer-events: none;
+}
+{% endblock %}
+{% block body %}
+
+<h2> Search results for:   {{ item_search | title}} </h2>
+{% if item_final|length == 0 %}
+    {% if item_search|length < 4 %}
+        <h2> {{ error_msg }} </h2>
+    {% else %}
+        <br>
+        <h2> {{ empty_list }} </h2>
+    {% endif %}
+{% else %}
+    {% if item_final|length > 1 %}
+    <h2> Number of results is {{ result_number }}
+        <div class="col">
+        <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Course</th>
+            </tr>
+        </thead>
+        {% for final in user_item %}
+        <tbody>
+            <tr>
+            <th scope="row">{{ final.2 }}</th>
+            <td>
+            <a href = "{{ final.1 }}" style="text-decoration:none" >
+                                <h2> 
+                                    <p>{{ final.0}}</p>
+                                </h2>
+                            </a>
+            </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+        </table>  
+        </div>
+        <ul class = "pagination justify-content-center">
+        {% if user_item.number > 1 %}
+            <li class = "page-item active">
+                <a href = "?page={{ 1 }}" class = "page-link">First page </a>
+            </li>
+        {% endif %}
+        {% if user_item.number > 0 %}
+                        {% if user_item.number == user_item.paginator.num_pages%}
+                            <li class="page-item"></li>
+                        {% else %}
+                            <li class = "page-item active">
+                                <a href = "?page={{ user_item.paginator.num_pages }}" class = "page-link">Last page </a>
+                            </li>
+                        {% endif %}
+        {% else %}
+                        <li class="page-item"></li>
+        {% endif%}
+        
+        </ul>
+        <br>
+        <ul class = "pagination justify-content-center">
+                {% if user_item.has_previous %}
+                    <li class="page-item"> 
+                        <a class="page-link" href = "?page={{ user_item.previous_page_number }}">Previous</a>
+                    </li>
+                {% else %}
+                    <li></li>
+                    
+                {% endif %}
+                {% for p in user_item.paginator.page_range %}
+                    {% if user_item.number == p %}
+                        <li class = "page-item active page_link">
+                            <a href = "?page={{ p }}" class = "page-link">{{ p }} </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            {% comment %} <a class="page-link" href = "?page={{ p }}"> {{ p }} </a> {% endcomment %}
+                        </li>
+                    {% endif%}
+                {% endfor %}
+                {% if user_item.has_next %}
+                    <li class="page-item"> <a class="page-link" href = "?page={{ user_item.next_page_number }}">Next</a></li>
+                {% else %}
+                    <li></li>
+                {% endif%}
+            </ul>
+        
+    {% else %}
+        <br>
+        <h2> {{ error_msg }} </h2>
+    {% endif %}
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% endblock %}

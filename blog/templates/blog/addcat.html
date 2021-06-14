@@ -1,0 +1,30 @@
+{% extends 'blog/basic.html' %}
+
+{% block title %} Add Category {% endblock %}
+
+{% block css %}
+{% endblock%}
+{% block body %}
+{% load static %}
+{% if user.is_authenticated %}
+<div class="container my-3">
+    <div class="form-group">
+    <h3>Add Your Category</h3><br>
+    <form  method="POST" class="post-form"  enctype="multipart/form-data">
+        {% csrf_token %}
+                {{ form.as_p }}
+                {{ form.media}}
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+</div>
+
+{% else %}
+
+    <h3>Kindly Login Please!!</h3>
+
+{% endif %}
+
+{% endblock %}
+{% block js %}
+{% endblock %}

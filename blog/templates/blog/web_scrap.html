@@ -1,0 +1,99 @@
+{% extends 'blog/basic.html' %}
+{% block title %} Web Scrapping {% endblock %}
+{% block css %}
+#loading {
+    position: fixed
+    width: 100%;
+    height: 100vh;
+    background: #fff 
+    url("https://flevix.com/wp-content/uploads/2020/01/Bounce-Bar-Preloader-1.gif") no-repeat center;
+    z-index: 99999;
+} 
+header{
+    width: 100%;
+    height: 100vh;
+}
+.not-visible{
+    display: none
+}
+.for-control{
+    width: 207px;
+}
+{% endblock %}
+{% block body %}
+<div class="container">
+    <h1 style="text-align: center">What do you want to search for on Codedaddies List?</h1>
+    <div class="row">
+        <div class="col s4">
+            <!-- Promo Content 1 goes here -->
+            <div class="center">
+                <svg width="10em" height="10em" viewBox="0 0 16 16" class="bi bi-display" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.75 13.5c.167-.333.25-.833.25-1.5h4c0 .667.083 1.167.25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75z"/>
+                    <path fill-rule="evenodd" d="M13.991 3H2c-.325 0-.502.078-.602.145a.758.758 0 0 0-.254.302A1.46 1.46 0 0 0 1 4.01V10c0 .325.078.502.145.602.07.105.17.188.302.254a1.464 1.464 0 0 0 .538.143L2.01 11H14c.325 0 .502-.078.602-.145a.758.758 0 0 0 .254-.302 1.464 1.464 0 0 0 .143-.538L15 9.99V4c0-.325-.078-.502-.145-.602a.757.757 0 0 0-.302-.254A1.46 1.46 0 0 0 13.99 3zM14 2H2C0 2 0 4 0 4v6c0 2 2 2 2 2h12c2 0 2-2 2-2V4c0-2-2-2-2-2z"/>
+                </svg>
+                <p>Fast craigslist web scraper</p>
+                <p class="light center">Scrape away right here with a beautiful GUI.</p>
+            </div>
+        </div>
+
+        <div class="col s4">
+            <!-- Promo Content 2 goes here -->
+            <div class="center">
+                <svg width="10em" height="10em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                </svg>
+                <p>Filter your searches</p>
+                <p class="light center">We built in functionality to filter based on pricing.</p>
+            </div>
+        </div>
+
+        <div class="col s4">
+            <!-- Promo Content 3 goes here -->
+            <div class="center">
+                <svg width="10em" height="10em" viewBox="0 0 16 16" class="bi bi-book" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M1 2.828v9.923c.918-.35 2.107-.692 3.287-.81 1.094-.111 2.278-.039 3.213.492V2.687c-.654-.689-1.782-.886-3.112-.752-1.234.124-2.503.523-3.388.893zm7.5-.141v9.746c.935-.53 2.12-.603 3.213-.493 1.18.12 2.37.461 3.287.811V2.828c-.885-.37-2.154-.769-3.388-.893-1.33-.134-2.458.063-3.112.752zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                </svg>
+                <p>A much sexier front-end to Craigslist</p>
+                <p class="light center">We built this with ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <form action="{% url 'webResults' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="search" placeholder="search" id="new_query">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+        </button>
+    </form>
+    <br>
+<h3> Code With Harry <h3>
+    <form action="{% url 'courseScrapping' %}" method="post">
+        {% csrf_token %}
+        
+        {% comment %} <input class = "form-control" type="text" name="search_item" placeholder="search" id="search_item">
+        <button class="btn btn-success my-2 my-sm-0 mx-1" type="submit" name="action" onclick=myFunction() > Search
+            {% comment %} <i class="material-icons right">Search</i> {% endcomment %}
+        {% comment %} </button> {% endcomment %} 
+        <div>
+            <input type="text" class="for-control" name="search_item" id="search_item" placeholder="search" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2" onclick=myFunction()>Search</button>
+        </div>
+    </form> 
+
+</div>
+
+{% endblock %}
+{% block js %}
+const bdy = document.getElementById("bdy");
+function myFunction(){
+    const page_content = document.getElementById("page-container");
+    const loader = document.getElementById("loading");
+    {% comment %} const text = document.getElementById("text"); {% endcomment %}
+    page_content.classList.add("not-visible");
+    {% comment %} text.classList.add("not-visible"); {% endcomment %}
+    loader.classList.remove("not-visible");
+}
+
+{% endblock %}

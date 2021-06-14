@@ -1,0 +1,77 @@
+{% extends 'blog/basic.html' %}
+{% block title %} Blogging{% endblock %}
+{% block css %}
+.rounded {
+    border-radius: 2.25rem!important;
+}
+.imge{
+border-radius: 2.25rem!important;
+}
+{% endblock %}
+{% block body %}
+{% load static %}
+<div class="container">
+
+    <div class="row my-2">
+    
+        {% for post in object_list  %}
+            <div class="col-md-6">
+                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static" style="
+        background-color: floralwhite;">
+                        <strong class="d-inline-block mb-2 text-primary">{{post.category|title}}</strong>
+                        <h3 class="mb-0">{{post.title|slice:":15"}}</h3>
+
+                        <div class="mb-1 text-muted">{{post.sub_title|slice:":15"}}</div><br>
+                        <p>{{post.pub_date}}</p>
+                        <a style="text-decoration:none" href="{% url 'categoryView' post.category|slugify %}" >Related to '{{post.category|title}}'</a>
+                        <a style="text-decoration:none" href="{% url 'blogPost' post.pk %}" >Continue reading</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block imge">
+                        <img src="/media/{{post.header_image}}" alt="None.  ," class="bd-placeholder-img" width="200" height="260"
+                            aria-label="Placeholder: Thumbnail"/>
+                    </div>
+                </div>
+            </div>
+        
+{% if forloop.counter|divisibleby:2 %}
+    </div>
+    <div class="row my-2">
+    {% endif %}
+
+    {% endfor %}
+
+    </div>
+    </div>
+
+    <br>
+    {% if is_paginated %}
+        <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+        {% else %}
+            <li></li>
+        {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class = "page-item active ">
+            <a href = "?page={{ i }}" class = "page-link">{{ i }} </a>
+        </li>
+      {% else %}
+        <li class="page-item">
+            <a class="page-link" href = "?page={{ i }}"> {{ i }} </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+        </li>
+    {% else %}
+      <li></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+{% endblock %}

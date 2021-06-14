@@ -1,0 +1,52 @@
+{% extends 'blog/basic.html' %}
+{% block title %} Course Scrapping {% endblock %}
+
+{% block body %}
+
+<h2> Search results for:   {{ search_item | title}} </h2>
+
+<a href='/blog/new'>Link </a>
+{% if final_items|length == 0 %}
+    {% if search_item|length < 4%}
+        <h2> {{ warning_error }}
+    {% else %}
+        <br>
+        <h2> {{ error_call }} </h2>
+    {% endif %}
+{% else %}
+    {% if final_items|length > 1 %}
+        <div class="col">
+            <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Course</th>
+                </tr>
+            </thead>
+            {% for final in user %}
+            <tbody>
+                <tr>
+                <th scope="row">{{ final.2 }}</th>
+                    <td>
+                        <a href = "{{ final.1 }}" style="text-decoration:none" >
+                                            <h2> 
+                                                <p>{{ final.0}}</p>
+                                            </h2>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+            </table>
+        </div>
+    {% else %}
+        <br>
+        <h2> {{ warning_error }} </h2>
+    {% endif %}
+{% endif %}
+
+
+{% endblock %}
+
+{% block js %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'blog/basic.html' %}
+{% block title %} Add Blog {% endblock %}
+{% block css %}
+{% endblock%}
+{% block body %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Welcome User!</strong> Please write your blog.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{% load static %}
+{% if user.is_authenticated %}
+<div class="container my-3">
+    <div class="form-group">
+    <h3>Add Your Blog</h3><br>
+    <form  method="POST" class="post-form"  enctype="multipart/form-data">
+        {% csrf_token %}
+                {{ form.as_p }}
+                {{ form.media}}
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+{% else %}
+    <h3>Kindly Login Please!!</h3>
+
+    {% endif %}
+
+</div>
+{% endblock %}
+{% block js %}
+    var name = "{{ user.id }}";
+    document.getElementById("auth").value = name;
+{% endblock %}
