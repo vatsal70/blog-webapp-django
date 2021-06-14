@@ -79,7 +79,6 @@ Pillow==7.2.0
 pipenv==2020.6.2
 plyer==1.4.3
 prompt-toolkit==3.0.18
-PyAudio @ file:///C:/Users/vatsal70/Desktop/pythonProject/PyAudio-0.2.11-cp38-cp38-win_amd64.whl
 pycparser==2.20
 pycryptodome==3.9.8
 pyee==7.0.4
@@ -88,7 +87,6 @@ pyinstaller==4.0
 pyinstaller-hooks-contrib==2020.8
 pyparsing==2.4.7
 PyPDF2==1.26.0
-pypiwin32==223
 pyppeteer==0.2.2
 pyquery==1.4.3
 python-bidi==0.4.2
@@ -97,8 +95,6 @@ python-slugify==4.0.1
 pyttsx3==2.90
 pytz==2020.1
 PyWavelets==1.1.1
-pywin32==228
-pywin32-ctypes==0.2.0
 PyYAML==5.3.1
 redis==3.5.3
 reportlab==3.5.66
